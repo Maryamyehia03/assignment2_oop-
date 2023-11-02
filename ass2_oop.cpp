@@ -12,8 +12,8 @@ int main()
     cin >> num1;
     cout << "Enter the second number: \n";
     cin >> num2;
-    number1.setNum(num1); 
-    number2.setNum(num2);
+
+    number1.setNum(num1);  number2.setNum(num2);
     if (!number1.isvalid())
     {
         cout << "Please, Enter the right number\n"; return 0;
@@ -22,10 +22,15 @@ int main()
     {
         cout << "Please, Enter the right number\n"; return 0;
     } 
+
     number1.makebigreal(); number2.makebigreal();
-   number3= number1.operator+(number2);
-   number3.makebigreal();
-   cout << number3.getbigreal() << " \n"<< number2.getbigreal() << " \n";
-   
-   //cout<< number1.getbigreal();
+
+    if (number1 < number2) cout << "The first number smaller than the second number\n";
+    else if (number1 > number2) cout << "The first greater than the second number\n";
+    else if (number1 == number2)cout << "The first is equal the second number\n";
+
+    // number3= number1+number2;
+//number3.makebigreal();
+// cout << number3.getbigreal() << " \n"<< number2.getbigreal() << " \n";
+//cout<< number1.getbigreal();
 }
