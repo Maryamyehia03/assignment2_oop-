@@ -330,7 +330,6 @@ void BigReal::makebigreal()
     }
 }
 
-
 BigReal::BigReal(double realNumber) {
     s1 = 0.0;
     s2 = 0.0;
@@ -343,5 +342,12 @@ BigReal::BigReal(string realNumber) {
 
 }
 
+BigReal BigReal::operator=(BigReal other)
+{
+    sign = other.sign;
+    s1 = other.s1;
+    s2 = other.s2;
+    return BigReal(sign, s1, s2);
+}
 
 
