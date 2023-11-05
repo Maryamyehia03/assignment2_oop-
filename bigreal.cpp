@@ -276,6 +276,18 @@ void BigReal::makebigreal()
 }
 
 
+BigReal::BigReal(double realNumber) {
+    s1=0.0;
+    s2=0.0;
+    num=0.0;
+
+}
+
+BigReal::BigReal(string realNumber) {
+    num=realNumber;
+
+}
+
 
 
 
