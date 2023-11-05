@@ -6,55 +6,56 @@ using namespace std;
 
 BigReal BigReal::operator+(BigReal other)
 {
-cary=0;
-      char ci;
-       if (sign==other.sign)
-       { temp=true;
-           //collect part integer
-           ci=sign;
-           for (char digit:s1)
-           {
-            result1=result1*10+(digit-'0');
-           }
-           for (char digit:other.s1)
-           {
-            result11=result11*10+(digit-'0');
-           }
-           res1=result1+result11;
-           //-------------------------------------------
-           //pad small string from the right by 0
-               if (s2.size()>other.s2.size()) {
-               for (int j = 0; j < (s2.size() - other.s2.size()); ++j) {
-               other.s2.push_back('0');
-               }
-           }
-           else if (s2.size()<other.s2.size()) {
-               for (int j = 0; j < (other.s2.size() - s2.size()); ++j) {
+        char ci;
+        if (sign == other.sign) {
+            temp = true;
+            //collect part integer
+            ci = sign;
+            for (char digit: s1) {
+                result1 = result1 * 10 + (digit - '0');
+            }
+            for (char digit: other.s1) {
+                result11 = result11 * 10 + (digit - '0');
+            }
+            res1 = result1 + result11;
+            //-------------------------------------------
+            //pad small string from the right by 0
+            if (s2.size() > other.s2.size()) {
+                for (int j = 0; j < (s2.size() - other.s2.size()); ++j) {
+                    other.s2.push_back('0');
+                }
+            } else if (s2.size() < other.s2.size()) {
+                for (int j = 0; j < (other.s2.size() - s2.size()); ++j) {
                     s2.push_back('0');
-               }
-           }
-           //-------------------------------------------------------------
-           //collect part fraction
-           for (char digit:s2)
-           {
-              result2=result2*10+(digit-'0');
-           }
-           for (char digit:other.s2)
-           {
-              result22=result22*10+(digit-'0');
-           }
-           res2=result2+result22;
-           cary=res2;
-           //----------------------------------
-           //take the carry
-           while (true)
-           {
-               if (cary==1||cary==0)break;
-                cary=cary/10;
-           }
-           return BigReal(ci,res1+cary,res2);
-       }
-}
+                }
+            }
+            //-------------------------------------------------------------
+            //collect part fraction
+            for (char digit: s2) {
+                result2 = result2 * 10 + (digit - '0');
+            }
+            for (char digit: other.s2) {
+                result22 = result22 * 10 + (digit - '0');
+            }
+            res2 = result2 + result22;
+            cary = res2;
+            //----------------------------------
+            //take the carry
+            while (true) {
+                if (cary == 1 || cary == 0)break;
+                cary = cary / 10;
+            }
+            return BigReal(ci, res1 + cary, res2);
+        }
+//**********************************************
+        if (sign != other.sign && sign == '+') {
+
+            //  return BigReal(sign,s1,s2)-other;
+        } else if (sign != other.sign && sign == '-') {
+            //  return other-BigReal(sign,s1,s2);
+        }
+    }
+//-----------------||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 void BigReal::setNum(string realNumber)
 {
