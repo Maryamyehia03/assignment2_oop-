@@ -185,6 +185,13 @@ number3.s2=result1;
 
 
     return number3;
+    else if(sign=='+' && other.sign=='-'){
+        return number1+other;
+    }
+    else if(sign=='-' && other.sign=='+'){
+            return -(number1+other);
+
+    }
 
 
 }
