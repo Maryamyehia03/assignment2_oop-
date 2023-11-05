@@ -6,7 +6,7 @@ using namespace std;
 
 BigReal BigReal::operator+(BigReal other)
 {
-     int cary = 0;
+    int cary = 0;
     long long result1 = 0, res1, result11 = 0;
     long long  res2 = 0, result22 = 0, result2 = 0;
     long long min2, min22, min0;
@@ -67,135 +67,139 @@ void BigReal::setNum(string realNumber)
     num = realNumber;
 }
 
+string result1, result2;
 
-string result1,result2;
-BigReal BigReal::operator-(BigReal other){
-BigReal number1,number3;
+BigReal BigReal::operator-(BigReal other) {
 
-if(s1.size()<other.s1.size()){
-        int difference=other.s1.size()-s1.size();
-    for(int j=0;j<difference;j++){
-        s1.insert(j,"0");
+ 
+    if (sign == '+' && other.sign == '-') {
+        return BigReal(sign,s1,s2) + other;
     }
+    else if (sign == '-' && other.sign == '+') {
+        return  other - BigReal(sign, s1, s2);
+
+    }
+    BigReal number1(), number3();
+
+
+    if (s1.size() < other.s1.size()) {
+        int difference = other.s1.size() - s1.size();
+        for (int j = 0; j < difference; j++) {
+            s1.insert(j, "0");
+        }
+
+    }
+    if (s1.size() > other.s1.size()) {
+        int difference = s1.size() - other.s1.size();
+        for (int j = 0; j < difference; j++) {
+            other.s1.insert(j, "0");
+        }
+
+    }
+    if (s2.size() > other.s2.size()) {
+        int difference = s2.size() - other.s2.size();
+        for (int j = 0; j < difference; j++) {
+            other.s2.insert(j, "0");
+        }
+
+    }
+    if (s2.size() < other.s2.size()) {
+        int difference = other.s2.size() - s2.size();
+        for (int j = 0; j < difference; j++) {
+            s2.insert(j, "0");
+        }
+
+    }
+    if (other.sign == '+' && sign == '+') {
+        int carry = 0, digit, digitother, subtract;
+        string result1;
+        for (int j = other.s2.size(); j >= 1; j--) {
+            digit = s2[j] - '0';
+            digitother = other.s2[j] - '0';
+            subtract = digit - digitother - carry;
+            if (subtract < 0) {
+                subtract += 10;
+                carry = 1;
+            }
+            else if (subtract >= 0) {
+                carry = 0;
+                result1.push_back(subtract);
+            }
+
+
+        }
+        string result2 = "";
+        for (int j = other.s1.size(); j >= 0; j--) {
+            digit = s2[j] - '0';
+            digitother = other.s2[j] - '0';
+            subtract = digit - digitother - carry;
+            if (subtract < 0) {
+                subtract += 10;
+                carry = 1;
+            }
+            else if (subtract >= 0) {
+                carry = 0;
+                result2.push_back(subtract);
+            }
+
+
+
+        }
+
+
+
+
+        number3().s1 = result2;
+        number3().s2 = result1;
+
+
+        return number3();
+
+    }
+    else if (sign == '-' && other.sign == '-') {
+        int carry = 0, digit, digitother, subtract;
+        string result1;
+        for (int j = other.s2.size(); j >= 1; j--) {
+            digit = s2[j] - '0';
+            digitother = other.s2[j] - '0';
+            subtract = digitother - digit - carry;
+            if (subtract < 0) {
+                subtract += 10;
+                carry = 1;
+            }
+            else if (subtract >= 0) {
+                carry = 0;
+                result1.push_back(subtract);
+            }
+        }
+
+        for (int j = other.s1.size(); j >= 0; j--) {
+            digit = s2[j] - '0';
+            digitother = other.s2[j] - '0';
+            subtract = digitother - digit - carry;
+            if (subtract < 0) {
+                subtract += 10;
+                carry = 1;
+            }
+            else if (subtract >= 0) {
+                carry = 0;
+                result2.push_back(subtract);
+            }
+        }
+
+    }
+
+
+    number3().s1 = result2;
+    number3().s2 = result1;
+
+   
+
+    return number3();
+   
+
 
 }
-if(s1.size()>other.s1.size()){
-        int difference=s1.size()-other.s1.size();
-    for(int j=0;j<difference;j++){
-        other.s1.insert(j,"0");
-    }
-
-}
-if(s2.size()>other.s2.size()){
-        int difference=s2.size()-other.s2.size();
-    for(int j=0;j<difference;j++){
-        other.s2.insert(j,"0");
-    }
-
-}
-if(s2.size()<other.s2.size()){
-        int difference=other.s2.size()-s2.size();
-    for(int j=0;j<difference;j++){
-        s2.insert(j,"0");
-    }
-
-}
-if(other.sign =='+'  && sign=='+'){
-       int carry=0,digit,digitother,subtract;
-       string result1;
-    for(int j=other.s2.size();j>=1;j--){
-        digit=s2[j]-'0';
-        digitother=other.s2[j]-'0';
-        subtract=digit-digitother-carry;
-        if(subtract<0){
-            subtract+=10;
-            carry=1;
-        }
-        else if(subtract>=0){
-            carry=0;
-            result1.push_back(subtract);
-        }
-
-
-    }
-string result2="";
-     for(int j=other.s1.size();j>=0;j--){
-        digit=s2[j]-'0';
-        digitother=other.s2[j]-'0';
-        subtract=digit-digitother-carry;
-        if(subtract<0){
-            subtract+=10;
-            carry=1;
-        }
-        else if(subtract>=0){
-            carry=0;
-            result2.push_back(subtract);
-        }
-
-
-
-    }
-
-
-
-
-number3.s1=result2;
-number3.s2=result1;
-
-
-    return number3;
-
-}
-else if(sign=='-' && other.sign=='-'){
-     int carry=0,digit,digitother,subtract;
-       string result1;
-    for(int j=other.s2.size();j>=1;j--){
-        digit=s2[j]-'0';
-        digitother=other.s2[j]-'0';
-        subtract=digitother-digit-carry;
-        if(subtract<0){
-            subtract+=10;
-            carry=1;
-        }
-        else if(subtract>=0){
-            carry=0;
-            result1.push_back(subtract);
-        }
-    }
-
-     for(int j=other.s1.size();j>=0;j--){
-        digit=s2[j]-'0';
-        digitother=other.s2[j]-'0';
-        subtract=digitother-digit-carry;
-        if(subtract<0){
-            subtract+=10;
-            carry=1;
-        }
-        else if(subtract>=0){
-            carry=0;
-            result2.push_back(subtract);
-        }
-    }
-
-}
-
-
-number3.s1=result2;
-number3.s2=result1;
-
-
-    return number3;
-    else if(sign=='+' && other.sign=='-'){
-        return number1+other;
-    }
-    else if(sign=='-' && other.sign=='+'){
-            return -(number1+other);
-
-    }
-
-
-}
-
 
 bool BigReal::operator<(BigReal anotherReal)
 {
@@ -381,10 +385,6 @@ bool BigReal::operator==(BigReal anotherReal)
 
 }
 
-BigReal::BigReal()
-{
-}
-
 BigReal::BigReal(char cc, long long n1, long long n2)
 {
     sign = cc;
@@ -479,5 +479,4 @@ BigReal BigReal::operator=(BigReal other)
     s2 = other.s2;
     return BigReal(sign, s1, s2);
 }
-
 
