@@ -11,6 +11,7 @@ public:
 	BigReal(double realNumber = 0.0); // Default constructor
 	BigReal(string realNumber); // Initialize from string
 	//friend ostream& operator << (ostream& out, BigReal num);
+	BigReal operator-(BigReal other);
 	BigReal operator+ (BigReal other);
 	BigReal operator- (BigReal& other);
 	//BigReal(const BigReal& other); // Copy constructor
@@ -27,6 +28,6 @@ public:
 	bool isvalid();
     string getbigreal();
 	void makebigreal();
-	
+
 };
 
