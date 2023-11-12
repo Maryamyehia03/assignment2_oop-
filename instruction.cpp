@@ -46,9 +46,10 @@ void instruction::instr(string s)
     {
 
     }
-    else if (s[0] == '4')
+    else if (s[0] == '4' && s[1]=='0')
     {
-
+       registers00.load1r(s[3],registers00.read(s[2]));
+        cout<<registers00.read(s[3])<<"\n";
     }
     else if (s[0]=='5')
     {
