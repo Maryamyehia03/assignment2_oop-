@@ -2,18 +2,16 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include "registers.h"
-#include "instruction.h"
 using namespace std;
-class memory 
+class memory
 {
 private:
 
-	int cnt = 0;
-	vector <pair<string, string>>vm;
+    int cnt = 0;
+    vector <pair<string, string>>vm={{"00","00"},{"01","00"}};
 
 public:
-	
-	int print(string addres);
+    int print(string address);
+    friend class instruction;
 };
 
