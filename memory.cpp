@@ -3,10 +3,9 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
-#include "registers.h"
 using namespace std;
 
-int memory::print(string addres)
+int memory::print(string address)
 {
     if (cnt > 255)
     {
@@ -14,7 +13,7 @@ int memory::print(string addres)
     }
     cnt++;
     for (auto it : vm) {
-        if (it.first == addres)
+        if (it.first == address)
         {
             string s = it.second;
             int ans;
