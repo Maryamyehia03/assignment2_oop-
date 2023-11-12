@@ -2,23 +2,23 @@
 #include <iostream>
 using namespace std;
 
-bool registers:: check(char reg) {
+bool registers::check(char reg) {
     if (size > 15)
     {
         return false;
     }
     else {
-        for (auto it : v) {
+        for (auto it : v)
+        {
             if (it.first == reg)return true;
         }
     }
     return false;
 }
 
-int registers::read(char reg)
+int  registers::read(char reg)
 {
     if (!check(reg))return 0;
-
     for (auto it : v)
     {
         if (it.first == reg)
@@ -26,6 +26,7 @@ int registers::read(char reg)
             return it.second;
         }
     }
+    return 0;
 }
 
 void registers::load1r(char regist, int value)
