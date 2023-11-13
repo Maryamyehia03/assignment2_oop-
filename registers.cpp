@@ -8,7 +8,7 @@ bool registers::check(char reg) {
         return false;
     }
     else {
-        for (auto it : v)
+        for (auto it : vr)
         {
             if (it.first == reg)return true;
         }
@@ -18,8 +18,8 @@ bool registers::check(char reg) {
 
 int  registers::read(char reg)
 {
-    if (!check(reg))return 0;
-    for (auto it : v)
+    if (!check(reg)){cout<<"Register isn't found";return 0;}
+    for (auto it : vr)
     {
         if (it.first == reg)
         {
@@ -36,7 +36,7 @@ void registers::load1r(char regist, int value)
         cout << "Sorry! The register is full\n"; return;
     }
     size++;
-    for (auto& it : v) {
+    for (auto& it : vr) {
         if (it.first == regist)
         {
             it.second = value;
@@ -45,4 +45,10 @@ void registers::load1r(char regist, int value)
     }
     cout << "Sorry! The register isn't found\n";
     return;
+}
+
+void registers::print() {
+    for (auto it:vr) {
+    cout<< it.first<<" "<< hex(it.second)<<"\n";
+    }
 }
