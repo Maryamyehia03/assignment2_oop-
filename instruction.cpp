@@ -1,6 +1,6 @@
 #include "instruction.h"
-//#include "registers.h"
-//#include "memory.h"
+#include "registers.h"
+#include "memory.h"
 #include "bitset"
 #include<iostream>
 
@@ -17,7 +17,7 @@ int instruction::addTwoBinary(int num1, int num2)
 
     // Check for overflow
     if (sum[31] != sum[30]) {
-        std::cerr << "Overflow occurred!" << std::endl;
+        std::cout << "Overflow occurred!" << std::endl;
         // Handle overflow as needed
     }
 
@@ -25,43 +25,48 @@ int instruction::addTwoBinary(int num1, int num2)
     return static_cast<int>(sum.to_ulong());
 }
 
-
 void instruction::instr(string s)
 {
+    memory.storev(s);
+    for (int i=0;i<256;i++) {
+        if (s[0] == '1')
+        {
+            registers00.load1r(s[1], memory.printint(conv2(s[2], s[3])));
+            //cout << registers00.read(s[1]) << "\n";
+        }
 
+        else if (s[0] == '2') {
+            registers00.load1r(s[1], con1(conv2(s[2], s[3])));
+         //   cout << registers00.read(s[1]) << "\n";
+        }
 
-    // while (s != "c000")
-    //  {
-    if (s[0] == '1')
-    {
-        registers00.load1r(s[1], memory.print(conv2(s[2], s[3])));
-        cout << registers00.read(s[1]) << "\n";
-    }
-    else if (s[0] == '2')
-    { cout<<s[1]<<" "<<s[2]<<" "<<s[3]<<"\n";
-        registers00.load1r(s[1], con1(conv2(s[2], s[3])));
-        cout << registers00.read(s[1]) << "\n";
-    }
-    else if (s[0]=='3')
-    {
+        else if (s[0] == '3')
+        {
+            if (s[2]=='0'&&s[3]=='0')cout<<registers00.read(s[1]);
+        memory.loadm(conv2(s[2],s[3]), hex(registers00.read(s[1])));
+        }
 
-    }
-    else if (s[0] == '4' && s[1]=='0')
-    {
-       registers00.load1r(s[3],registers00.read(s[2]));
-        cout<<registers00.read(s[3])<<"\n";
-    }
-    else if (s[0]=='5')
-    {
-        registers00.load1r(s[1], addTwoBinary(registers00.read(s[2]), registers00.read(s[3])));
-        cout << registers00.read(s[1]) << "\n";
-    }
-    else if (s[0]=='B')
-    {
+        else if (s[0] == '4')
+        {
+            registers00.load1r(s[3], registers00.read(s[2]));
+            //cout << registers00.read(s[3]) << "\n";
+        }
 
-    }
+        else if (s[0] == '5')
+        {
+            registers00.load1r(s[1], addTwoBinary(registers00.read(s[2]), registers00.read(s[3])));
+           // cout << registers00.read(s[1]) << "\n";
+        }
 
-     //}
+        else if (s[0]=='B')
+         {
+            if (registers00.read(s[1])==registers00.read('0'))
+            {
+             i= con1(conv2(s[2],s[3]));
+            }
+        }
+        break;
+    }
 }
 
 
