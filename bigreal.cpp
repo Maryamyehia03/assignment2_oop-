@@ -245,7 +245,7 @@ void BigReal::makebigreal()
         for (; i < num.size(); ++i) {
             s2.push_back(num[i]);
         }
-    }
+    }else s2="0";
 }
 
 BigReal::BigReal(char si, string st1, string st2) {
