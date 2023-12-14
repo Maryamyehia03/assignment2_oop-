@@ -13,7 +13,8 @@ int main()
     cin >> num2;
 
 
-    BigReal number1(num1), number2(num2); 
+    BigReal number1, number2;
+    number1.setNum(num1);number2.setNum(num2);
     if (!number1.isvalid())
     {
         cout << "Please, Enter the right number\n"; return 0;
@@ -31,26 +32,33 @@ int main()
     if (x==1)
     {
       BigReal number3= number1+number2;
- cout << number3.getbigreal() << " \n";
+      cout << number3.getbigreal() << " \n";
 
     }
+
     else if (x==2)
     {
         BigReal number3 = number1 - number2;
         cout << number3.getbigreal() << " \n";
 
     }
+
     else if (x==3)
     {
-        if (number1 > number2) cout << "The first greater than the second number\n";
+        if (number1 > number2) cout << "YES, The first number is greater than the second number\n";
+        else cout<<"NO, The first number isn't greater than the second number\n ";
     }
-  else if (x==4)
+
+    else if (x==4)
     {
-        if (number1 < number2) cout << "The first number smaller than the second number\n";
+        if (number1 < number2) cout << "YES, The first number is smaller than the second number\n";
+        else cout << "NO, The first number isn't smaller than the second number\n";
     }
-  else if (x==5)
+
+    else if (x==5)
     {
-        if (number1 == number2)cout << "The first is equal the second number\n";
+        if (number1 == number2)cout << "YES, The first number is equal to the second number\n";
+        else cout << "NO, The first number isn't equal to the second number\n";
     }
 
 }
