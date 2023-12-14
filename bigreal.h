@@ -38,6 +38,7 @@ public:
     }
 
     void delet(string& s1){
+        if (s1.size()<=1)return;
         int n=0;
         for (int i = 0; i <s1.size(); ++i) {
             if (s1[i]=='0')s1.erase(s1.begin()+i),i=-1;
@@ -46,6 +47,7 @@ public:
     }
 
     void delet2(string& s2){
+        if (s2.size()<=1)return;
         for (int i = s2.size()-1; i >=0; --i) {
             if (s2[i]=='0')s2.pop_back();
             else break;
